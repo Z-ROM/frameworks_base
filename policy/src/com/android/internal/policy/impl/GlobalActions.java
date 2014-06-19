@@ -181,7 +181,10 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
     public void showDialog(boolean keyguardShowing, boolean isDeviceProvisioned) {
         mKeyguardShowing = keyguardShowing;
         mDeviceProvisioned = isDeviceProvisioned;
-        if (mDialog != null && mUiContext == null) {
+        if (mDialog != null) {
+            if (mUiContext != null) {
+                mUiContext = null;
+            }
             mDialog.dismiss();
             mDialog = null;
             mDialog = createDialog();
@@ -257,18 +260,6 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
             mSilentModeAction = new SilentModeTriStateAction(mContext, mAudioManager, mHandler);
         }
         mItems = new ArrayList<Action>();
-
-        int quickbootAvailable = 1;
-        final PackageManager pm = mContext.getPackageManager();
-        try {
-            pm.getPackageInfo("com.qapp.quickboot", PackageManager.GET_META_DATA);
-        } catch (NameNotFoundException e) {
-            quickbootAvailable = 0;
-        }
-
-        final boolean quickbootEnabled = Settings.Global.getInt(
-                mContext.getContentResolver(), Settings.Global.ENABLE_QUICKBOOT,
-                quickbootAvailable) == 1;
 
         // next: On-The-Go, if enabled
         boolean showOnTheGo = Settings.System.getBoolean(mContext.getContentResolver(),
@@ -368,8 +359,21 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
                             config.getClickActionDescription()) {
 
                         public void onPress() {
+                        // Check quickboot status
+                        boolean quickbootAvailable = false;
+                        final PackageManager pm = mContext.getPackageManager();
+                        try {
+                            pm.getPackageInfo("com.qapp.quickboot", PackageManager.GET_META_DATA);
+                            quickbootAvailable = true;
+                        } catch (NameNotFoundException e) {
+                            // Ignore
+                        }
+                        final boolean quickbootEnabled = Settings.Global.getInt(
+                                mContext.getContentResolver(), Settings.Global.ENABLE_QUICKBOOT,
+                                1) == 1;
+
                         // goto quickboot mode
-                        if (quickbootEnabled) {
+                        if (quickbootAvailable && quickbootEnabled) {
                             startQuickBoot();
                             return;
                         }
