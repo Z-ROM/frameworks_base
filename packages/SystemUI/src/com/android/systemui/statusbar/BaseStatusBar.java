@@ -16,8 +16,8 @@
 
 package com.android.systemui.statusbar;
 
-import android.annotation.OSELab;
-import android.annotation.OSELab.Classification;
+import android.annotation.ZLab;
+import android.annotation.ZLab.Classification;
 import android.service.notification.StatusBarNotification;
 import android.content.res.Configuration;
 import com.android.internal.statusbar.IStatusBarService;
@@ -107,18 +107,18 @@ import com.android.internal.statusbar.IStatusBarService;
 import com.android.internal.statusbar.StatusBarIcon;
 import com.android.internal.statusbar.StatusBarIconList;
 import com.android.systemui.statusbar.phone.Ticker;
-import com.android.internal.util.ose.SpamFilter;
-import com.android.internal.util.ose.SpamFilter.SpamContract.NotificationTable;
-import com.android.internal.util.ose.SpamFilter.SpamContract.PackageTable;
+import com.android.internal.util.zrom.SpamFilter;
+import com.android.internal.util.zrom.SpamFilter.SpamContract.NotificationTable;
+import com.android.internal.util.zrom.SpamFilter.SpamContract.PackageTable;
 import com.android.internal.widget.SizeAdaptiveLayout;
-import com.android.internal.util.ose.ButtonConfig;
-import com.android.internal.util.ose.DeviceUtils;
-import com.android.systemui.ose.lab.gestureanywhere.GestureAnywhereView;
+import com.android.internal.util.zrom.ButtonConfig;
+import com.android.internal.util.zrom.DeviceUtils;
+import com.android.systemui.zrom.lab.gestureanywhere.GestureAnywhereView;
 import com.android.systemui.R;
 import com.android.systemui.SearchPanelView;
 import com.android.systemui.RecentsComponent;
 import com.android.systemui.SystemUI;
-import com.android.systemui.oserecent.RecentController;
+import com.android.systemui.zrecent.RecentController;
 import com.android.systemui.statusbar.policy.BatteryController;
 import com.android.systemui.statusbar.policy.Clock;
 import com.android.systemui.statusbar.phone.Ticker;
@@ -127,7 +127,7 @@ import com.android.systemui.statusbar.notification.Hover;
 import com.android.systemui.statusbar.notification.HoverCling;
 import com.android.systemui.statusbar.notification.NotificationHelper;
 import com.android.systemui.statusbar.notification.Peek;
-import com.android.systemui.ose.SpamMessageProvider;
+import com.android.systemui.zrom.SpamMessageProvider;
 import com.android.systemui.statusbar.NotificationData.Entry;
 import com.android.systemui.statusbar.phone.KeyguardTouchDelegate;
 import com.android.systemui.statusbar.phone.NavigationBarOverlay;
@@ -313,7 +313,7 @@ public abstract class BaseStatusBar extends SystemUI implements
         return mNotificationData;
     }
 
-    @OSELab(name="GestureAnywhere", classification=Classification.NEW_FIELD)
+    @ZLab(name="GestureAnywhere", classification=Classification.NEW_FIELD)
     protected GestureAnywhereView mGestureAnywhereView;
 
     // Active dispay
@@ -2346,7 +2346,7 @@ public abstract class BaseStatusBar extends SystemUI implements
         return lp;
     }
 
-    @OSELab(name="GestureAnywhere", classification=Classification.NEW_METHOD)
+    @ZLab(name="GestureAnywhere", classification=Classification.NEW_METHOD)
     protected void addGestureAnywhereView() {
         mGestureAnywhereView = (GestureAnywhereView)View.inflate(
                 mContext, R.layout.gesture_anywhere_overlay, null);
@@ -2354,13 +2354,13 @@ public abstract class BaseStatusBar extends SystemUI implements
         mGestureAnywhereView.setStatusBar(this);
     }
 
-    @OSELab(name="GestureAnywhere", classification=Classification.NEW_METHOD)
+    @ZLab(name="GestureAnywhere", classification=Classification.NEW_METHOD)
     protected void removeGestureAnywhereView() {
         if (mGestureAnywhereView != null)
             mWindowManager.removeView(mGestureAnywhereView);
     }
 
-    @OSELab(name="GestureAnywhere", classification=Classification.NEW_METHOD)
+    @ZLab(name="GestureAnywhere", classification=Classification.NEW_METHOD)
     protected WindowManager.LayoutParams getGestureAnywhereViewLayoutParams(int gravity) {
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams(
                 LayoutParams.WRAP_CONTENT,

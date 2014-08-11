@@ -1,5 +1,5 @@
-<!-- OSELab: GestureAnywhere - BEGIN -->
-<com.android.systemui.ose.lab.gestureanywhere.GestureAnywhereView
+<!-- ZLab: GestureAnywhere - BEGIN -->
+<com.android.systemui.zrom.lab.gestureanywhere.GestureAnywhereView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="20dp"
     android:layout_height="40dp"
@@ -31,5 +31,5 @@
             android:src="@drawable/btn_ga_cancel_gesturing" />
     </FrameLayout>
 
-</com.android.systemui.ose.lab.gestureanywhere.GestureAnywhereView>
-<!-- OSELab: GestureAnywhere - END -->
+</com.android.systemui.zrom.lab.gestureanywhere.GestureAnywhereView>
+<!-- ZLab: GestureAnywhere - END -->

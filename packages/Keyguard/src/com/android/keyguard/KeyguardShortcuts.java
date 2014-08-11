@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2012 ParanoidAndroid Project
- * Copyright (C) 2014 OSE Project
+ * Copyright (C) 2014 ZROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,12 +37,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.internal.R;
-import com.android.internal.util.ose.AppHelper;
-import com.android.internal.util.ose.ButtonsHelper;
-import com.android.internal.util.ose.ButtonConfig;
-import com.android.internal.util.ose.DeviceUtils;
-import com.android.internal.util.ose.LockscreenTargetUtils;
-import com.android.internal.util.ose.OSEActions;
+import com.android.internal.util.zrom.AppHelper;
+import com.android.internal.util.zrom.ButtonsHelper;
+import com.android.internal.util.zrom.ButtonConfig;
+import com.android.internal.util.zrom.DeviceUtils;
+import com.android.internal.util.zrom.LockscreenTargetUtils;
+import com.android.internal.util.zrom.ZActions;
 import com.android.internal.widget.LockPatternUtils;
 
 import java.net.URISyntaxException;
@@ -117,7 +117,7 @@ public class KeyguardShortcuts extends LinearLayout {
                     @Override
                     public boolean onLongClick(View v) {
                         doHapticKeyClick(HapticFeedbackConstants.LONG_PRESS);
-                        OSEActions.processAction(mContext, action, true);
+                        ZActions.processAction(mContext, action, true);
                         return true;
                     }
                 });
@@ -126,7 +126,7 @@ public class KeyguardShortcuts extends LinearLayout {
                     @Override
                     public void onClick(View v) {
                         doHapticKeyClick(HapticFeedbackConstants.VIRTUAL_KEY);
-                        OSEActions.processAction(mContext, action, false);
+                        ZActions.processAction(mContext, action, false);
                     }
                 });
             }

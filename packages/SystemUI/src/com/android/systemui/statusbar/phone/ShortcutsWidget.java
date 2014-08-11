@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 OSE Project
+ * Copyright (C) 2014 ZROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,10 +42,10 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.android.internal.util.ose.ButtonsHelper;
-import com.android.internal.util.ose.ButtonConfig;
-import com.android.internal.util.ose.ButtonsConstants;
-import com.android.internal.util.ose.ImageHelper;
+import com.android.internal.util.zrom.ButtonsHelper;
+import com.android.internal.util.zrom.ButtonConfig;
+import com.android.internal.util.zrom.ButtonsConstants;
+import com.android.internal.util.zrom.ImageHelper;
 
 import com.android.systemui.R;
 

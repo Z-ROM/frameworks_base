@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 OSE Project
+ * Copyright (C) 2014 ZROM Project
  * This code is loosely based on portions of the CyanogenMod Project (Jens Doll) Copyright (C) 2013
  * and the ParanoidAndroid Project source, Copyright (C) 2012.
  *
@@ -64,12 +64,12 @@ import android.widget.ImageView;
 
 import com.android.internal.util.gesture.EdgeGesturePosition;
 import com.android.internal.util.gesture.EdgeServiceConstants;
-import com.android.internal.util.ose.ButtonConfig;
-import com.android.internal.util.ose.ButtonsConstants;
-import com.android.internal.util.ose.ButtonsHelper;
-import com.android.internal.util.ose.Converter;
-import com.android.internal.util.ose.ImageHelper;
-import com.android.internal.util.ose.OSEActions;
+import com.android.internal.util.zrom.ButtonConfig;
+import com.android.internal.util.zrom.ButtonsConstants;
+import com.android.internal.util.zrom.ButtonsHelper;
+import com.android.internal.util.zrom.Converter;
+import com.android.internal.util.zrom.ImageHelper;
+import com.android.internal.util.zrom.ZActions;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.BaseStatusBar;
 import com.android.systemui.statusbar.phone.NavigationBarOverlay;
@@ -831,24 +831,24 @@ public class PieController implements BaseStatusBar.NavigationBarCallback, PieVi
     @Override
     public void onLongClick(PieItem item) {
         String type = (String) item.longTag;
-        if (!OSEActions.isActionKeyEvent(type)) {
+        if (!ZActions.isActionKeyEvent(type)) {
             mPieContainer.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
         }
         mPieContainer.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_LONG_CLICKED);
-        OSEActions.processAction(mContext, type, true);
+        ZActions.processAction(mContext, type, true);
     }
 
     @Override
     public void onClick(PieItem item) {
         String type = (String) item.tag;
-        if (!OSEActions.isActionKeyEvent(type)) {
+        if (!ZActions.isActionKeyEvent(type)) {
             mPieContainer.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
         }
         if (!type.equals(ButtonsConstants.ACTION_MENU)) {
             mPieContainer.playSoundEffect(SoundEffectConstants.CLICK);
         }
         mPieContainer.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);
-        OSEActions.processAction(mContext, type, false);
+        ZActions.processAction(mContext, type, false);
     }
 
     private void doHapticTriggerFeedback() {

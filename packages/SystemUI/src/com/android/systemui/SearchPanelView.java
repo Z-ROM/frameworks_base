@@ -56,12 +56,12 @@ import android.view.ViewTreeObserver.OnPreDrawListener;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.FrameLayout;
 
-import com.android.internal.util.ose.ButtonConfig;
-import com.android.internal.util.ose.ButtonsConstants;
-import com.android.internal.util.ose.ButtonsHelper;
-import com.android.internal.util.ose.ImageHelper;
-import com.android.internal.util.ose.DeviceUtils;
-import com.android.internal.util.ose.OSEActions;
+import com.android.internal.util.zrom.ButtonConfig;
+import com.android.internal.util.zrom.ButtonsConstants;
+import com.android.internal.util.zrom.ButtonsHelper;
+import com.android.internal.util.zrom.ImageHelper;
+import com.android.internal.util.zrom.DeviceUtils;
+import com.android.internal.util.zrom.ZActions;
 import com.android.internal.widget.multiwaveview.GlowPadView;
 import com.android.internal.widget.multiwaveview.GlowPadView.OnTriggerListener;
 import com.android.internal.widget.multiwaveview.TargetDrawable;
@@ -131,11 +131,11 @@ public class SearchPanelView extends FrameLayout implements
                 if (!mSearchPanelLock) {
                     mLongPress = true;
                     mBar.hideSearchPanel();
-                    if (!OSEActions.isActionKeyEvent(mLongList.get(mTarget))) {
+                    if (!ZActions.isActionKeyEvent(mLongList.get(mTarget))) {
                         performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                     }
                     sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_LONG_CLICKED);
-                    OSEActions.processAction(mContext, mLongList.get(mTarget), true);
+                    ZActions.processAction(mContext, mLongList.get(mTarget), true);
                     mSearchPanelLock = true;
                  }
             }
@@ -172,14 +172,14 @@ public class SearchPanelView extends FrameLayout implements
             final int resId = mGlowPadView.getResourceIdForTarget(target);
             mTarget = target;
             if (!mLongPress) {
-                if (!OSEActions.isActionKeyEvent(mIntentList.get(target))) {
+                if (!ZActions.isActionKeyEvent(mIntentList.get(target))) {
                     performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                 }
                 if (!mIntentList.get(target).equals(ButtonsConstants.ACTION_MENU)) {
                     playSoundEffect(SoundEffectConstants.CLICK);
                 }
                 sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);
-                OSEActions.processAction(mContext, mIntentList.get(target), false);
+                ZActions.processAction(mContext, mIntentList.get(target), false);
                 mHandler.removeCallbacks(SetLongPress);
             }
         }

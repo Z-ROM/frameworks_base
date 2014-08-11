@@ -29,8 +29,8 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
-import android.annotation.OSELab;
-import android.annotation.OSELab.Classification;
+import android.annotation.ZLab;
+import android.annotation.ZLab.Classification;
 import android.app.ActivityManager;
 import android.app.ActivityManagerNative;
 import android.app.Notification;
@@ -111,12 +111,12 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.android.internal.statusbar.StatusBarIcon;
-import com.android.internal.util.ose.ButtonConfig;
-import com.android.internal.util.ose.ButtonsConstants;
-import com.android.internal.util.ose.ButtonsHelper;
-import com.android.internal.util.ose.DeviceUtils;
-import com.android.internal.util.ose.ShakeListener;
-import com.android.internal.util.ose.OSEActions;
+import com.android.internal.util.zrom.ButtonConfig;
+import com.android.internal.util.zrom.ButtonsConstants;
+import com.android.internal.util.zrom.ButtonsHelper;
+import com.android.internal.util.zrom.DeviceUtils;
+import com.android.internal.util.zrom.ShakeListener;
+import com.android.internal.util.zrom.ZActions;
 
 import com.android.systemui.BatteryMeterView;
 import com.android.systemui.BatteryCircleMeterView;
@@ -125,7 +125,7 @@ import com.android.systemui.EventLogTags;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.AppSidebar;
 import com.android.systemui.ReminderMessageView;
-import com.android.systemui.ose.StatusHeaderMachine;
+import com.android.systemui.zrom.StatusHeaderMachine;
 import com.android.systemui.statusbar.BaseStatusBar;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.GestureRecorder;
@@ -878,7 +878,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 UserHandle.USER_CURRENT) == 1;
     }
 
-    @OSELab(name="GestureAnywhere", classification=Classification.CHANGE_CODE)
+    @ZLab(name="GestureAnywhere", classification=Classification.CHANGE_CODE)
 
     private boolean isExpanded() {
         return Settings.System.getIntForUser(mContext.getContentResolver(),
@@ -1320,9 +1320,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
         if (!mRecreating) {
             removeSidebarView();
-            /* OSELab: GestureAnywhere - BEGIN */
+            /* ZLab: GestureAnywhere - BEGIN */
             addGestureAnywhereView();
-            /* OSELab: GestureAnywhere - END */
+            /* ZLab: GestureAnywhere - END */
         } else {
             addActiveDisplayView();
             addAppCircleSidebar();
@@ -2802,7 +2802,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     UserHandle.USER_CURRENT);
             if (event != null && !event.equals(ButtonsConstants.ACTION_NULL)) {
                 customButtonVibrate();
-                OSEActions.processAction(mContext, event, false);
+                ZActions.processAction(mContext, event, false);
             }
         }
     }

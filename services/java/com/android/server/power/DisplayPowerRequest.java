@@ -62,7 +62,7 @@ final class DisplayPowerRequest {
     // visible to the user.
     public boolean blockScreenOn;
 
-    // OSE settings - override config for ElectronBeam mode
+    // ZROM settings - override config for ElectronBeam mode
     public int electronBeamMode;
 
     // Multiplication factor for delays used in auto-brightness computations
