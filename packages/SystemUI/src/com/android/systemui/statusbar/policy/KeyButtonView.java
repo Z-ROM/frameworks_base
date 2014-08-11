@@ -43,8 +43,8 @@ import android.view.accessibility.AccessibilityEvent;
 import android.widget.ImageView;
 
 import com.android.internal.statusbar.IStatusBarService;
-import com.android.internal.util.ose.ButtonsConstants;
-import com.android.internal.util.ose.OSEActions;
+import com.android.internal.util.zrom.ButtonsConstants;
+import com.android.internal.util.zrom.ZActions;
 
 import com.android.systemui.R;
 
@@ -82,7 +82,7 @@ public class KeyButtonView extends ImageView {
             if (isPressed()) {
                 sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_LONG_CLICKED);
                 if (mLongpressAction != null
-                    && OSEActions.isActionKeyEvent(mLongpressAction)) {
+                    && ZActions.isActionKeyEvent(mLongpressAction)) {
                     setHapticFeedbackEnabled(false);
                 }
                 performLongClick();
@@ -333,7 +333,7 @@ public class KeyButtonView extends ImageView {
                 if (!mIsLongpressed) {
                     if (isPressed()) {
                         if (mClickAction != null
-                            && !OSEActions.isActionKeyEvent(mClickAction)) {
+                            && !ZActions.isActionKeyEvent(mClickAction)) {
                             performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                         }
                         performClick();
@@ -357,7 +357,7 @@ public class KeyButtonView extends ImageView {
                     && !mClickAction.equals(ButtonsConstants.ACTION_RECENTS)) {
                 cancelPreloadRecentApps();
             }
-            OSEActions.processAction(mContext, mClickAction, false);
+            ZActions.processAction(mContext, mClickAction, false);
             return;
         }
     };
@@ -369,7 +369,7 @@ public class KeyButtonView extends ImageView {
                     && !mLongpressAction.equals(ButtonsConstants.ACTION_RECENTS)) {
                 cancelPreloadRecentApps();
             }
-            OSEActions.processAction(mContext, mLongpressAction, true);
+            ZActions.processAction(mContext, mLongpressAction, true);
             return true;
         }
     };

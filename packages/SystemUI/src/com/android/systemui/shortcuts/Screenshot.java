@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 OSE Project
+ * Copyright 2014 ZROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.android.internal.util.ose.ButtonsConstants;
-import com.android.internal.util.ose.OSEActions;
+import com.android.internal.util.zrom.ButtonsConstants;
+import com.android.internal.util.zrom.ZActions;
 
 public class Screenshot extends Activity  {
 
@@ -37,7 +37,7 @@ public class Screenshot extends Activity  {
         // Allow statusbar to collapse if desired
         handle.postDelayed(new Runnable() {
             public void run() {
-                OSEActions.processActionWithOptions(Screenshot.this,
+                ZActions.processActionWithOptions(Screenshot.this,
                         ButtonsConstants.ACTION_SCREENSHOT, false, false);
                 Screenshot.this.finish();
             }
