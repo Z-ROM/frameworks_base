@@ -257,17 +257,8 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
         }
         mItems = new ArrayList<Action>();
 
-        int quickbootAvailable = 1;
-        final PackageManager pm = mContext.getPackageManager();
-        try {
-            pm.getPackageInfo("com.qapp.quickboot", PackageManager.GET_META_DATA);
-        } catch (NameNotFoundException e) {
-            quickbootAvailable = 0;
-        }
-
-        final boolean quickbootEnabled = Settings.Global.getInt(
-                mContext.getContentResolver(), Settings.Global.ENABLE_QUICKBOOT,
-                quickbootAvailable) == 1;
+        final boolean quickbootEnabled = Settings.System.getInt(
+                mContext.getContentResolver(), "enable_quickboot", 0) == 1;
 
         // next: On-The-Go, if enabled
         boolean showOnTheGo = Settings.System.getBoolean(mContext.getContentResolver(),
