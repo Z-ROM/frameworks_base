@@ -344,6 +344,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private boolean mHeadsUpGravityBottom;
     private boolean mStatusBarShows = true;
     private boolean mImeIsShowing;
+    private boolean mHeadsUpExpandedByDefault;
 
     // on-screen navigation buttons
     private NavigationBarView mNavigationBarView = null;
@@ -765,6 +766,12 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.SHAKE_SENSITIVITY))) {
                 updateShakeSensitivity();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.HEADS_UP_EXPANDED))) {
+                    mHeadsUpExpandedByDefault = Settings.System.getIntForUser(
+                            mContext.getContentResolver(),
+                            Settings.System.HEADS_UP_EXPANDED, 0,
+                            UserHandle.USER_CURRENT) == 1;
             } else if (uri != null && uri.equals(Settings.System.getUriFor(
                     Settings.System.QS_QUICK_ACCESS))) {
                 final ContentResolver resolver = mContext.getContentResolver();
@@ -1295,6 +1302,12 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     Settings.System.HEADS_UP_GRAVITY_BOTTOM, 0,
                     UserHandle.USER_CURRENT) == 1;
         }
+
+        mHeadsUpExpandedByDefault = Settings.System.getIntForUser(
+                mContext.getContentResolver(),
+                Settings.System.HEADS_UP_EXPANDED, 0,
+                UserHandle.USER_CURRENT) == 1;
+
         if (MULTIUSER_DEBUG) {
             mNotificationPanelDebugText = (TextView) mNotificationPanel.findViewById(R.id.header_debug_info);
             mNotificationPanelDebugText.setVisibility(View.VISIBLE);
@@ -2140,8 +2153,15 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 mInterruptingNotificationEntry = interruptionCandidate;
                 shadeEntry.setInterruption();
 
+                // Either the user want to see every heads up expanded....or the app which
+                // requests the heads up force it to show as expanded.
+                final boolean isExpanded = notification.getNotification().extras.getInt(
+                            Notification.EXTRA_HEADS_UP_EXPANDED,
+                            Notification.HEADS_UP_NOT_EXPANDED) == Notification.HEADS_UP_EXPANDED
+                            || mHeadsUpExpandedByDefault;
+
                 // 1. Populate mHeadsUpNotificationView
-                mHeadsUpNotificationView.setNotification(mInterruptingNotificationEntry);
+                mHeadsUpNotificationView.setNotification(mInterruptingNotificationEntry, isExpanded);
 
                 // 2. Animate mHeadsUpNotificationView in
                 mHandler.sendEmptyMessage(MSG_SHOW_HEADS_UP);

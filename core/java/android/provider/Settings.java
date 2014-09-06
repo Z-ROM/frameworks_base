@@ -2095,6 +2095,13 @@ public final class Settings {
         public static final int VOLUME_OVERLAY_NONE = 3;
 
         /**
+         * Volume panel background color
+         *
+         * @hide
+         */
+        public static final String VOLUME_PANEL_BG_COLOR = "volume_panel_bg_color";
+
+        /**
          * Whether the torch will pulse on incoming call
          * @hide
          */
@@ -4254,6 +4261,13 @@ public final class Settings {
         public static final String CALL_UI_IN_BACKGROUND = "call_ui_in_background";
 
         /**
+         * Whether incomming call UI stays in background and shows as heads up notification
+         *
+         * @hide
+         */
+        public static final String CALL_UI_AS_HEADS_UP = "call_ui_as_heads_up";
+
+        /**
          * In call dialpad state.
          * 0 = hidden
          * 1 = showing
@@ -4979,6 +4993,13 @@ public final class Settings {
          * @hide
          */
         public static final String HOVER_LONG_FADE_OUT_DELAY = "hover_long_fade_out_delay";
+
+        /**
+         * Whether heads up notification is expanded by default (default = disabled)
+         *
+         * @hide
+         */
+        public static final String HEADS_UP_EXPANDED = "heads_up_expanded";
 
         /**
          * Heads Up Notifications
